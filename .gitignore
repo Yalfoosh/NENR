@@ -1,0 +1,16 @@
+LAB1/.idea/LAB1.iml
+LAB1/.idea/misc.xml
+LAB1/.idea/modules.xml
+LAB1/.idea/workspace.xml
+LAB1/.idea/inspectionProfiles/profiles_settings.xml
+LAB1/__pycache__/defaults.cpython-37.pyc
+LAB1/__pycache__/domain.cpython-37.pyc
+LAB1/__pycache__/fuzzy_set.cpython-37.pyc
+LAB1/__pycache__/operation.cpython-37.pyc
+LAB1/venv/pyvenv.cfg
+LAB1/venv/Scripts/activate
+LAB1/venv/Scripts/activate.bat
+LAB1/venv/Scripts/Activate.ps1
+LAB1/venv/Scripts/deactivate.bat
+LAB1/venv/Scripts/python.exe
+LAB1/venv/Scripts/pythonw.exe
