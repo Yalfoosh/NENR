@@ -41,16 +41,38 @@ class Operation:
         return to_return
 
     @staticmethod
-    def s_norm_hamacher(fuzzy_set_1: Fuzzy, fuzzy_set_2: Fuzzy, p: float) -> MutableFuzzySet:
-        pass
-
-    @staticmethod
-    def t_norm_hamacher(fuzzy_set_1: Fuzzy, fuzzy_set_2: Fuzzy, p: float) -> MutableFuzzySet:
+    def s_norm_hamacher(fuzzy_set_1: Fuzzy, fuzzy_set_2: Fuzzy, p: float = 1.0) -> MutableFuzzySet:
         if fuzzy_set_1 is None or fuzzy_set_2 is None:
             raise ValueError(defaults.OPERATION_SET_NONE)
 
         if p is None or not isinstance(p, float):
             raise TypeError(defaults.OPERATION_HAMACHER_T_NORM_WRONG_TYPE)
+
+        if p < 0.:
+            raise ValueError(defaults.OPERATION_HAMACHER_NORM_NEGATIVE_PARAMETER)
+
+        to_return = MutableFuzzySet(Domain.from_domains_merge((fuzzy_set_1.domain, fuzzy_set_2.domain)))
+
+        for i, element in enumerate(to_return.domain):
+            a, b = (fuzzy_set_1.get_membership(element), fuzzy_set_2.get_membership(element))
+
+            if a == b and a == 0.:
+                to_return.set(i, 0.)
+            else:
+                to_return.set(i, (a + b - (2 - p) * a * b) / (1 - (1 - p) * a * b))
+
+        return to_return
+
+    @staticmethod
+    def t_norm_hamacher(fuzzy_set_1: Fuzzy, fuzzy_set_2: Fuzzy, p: float = 1.) -> MutableFuzzySet:
+        if fuzzy_set_1 is None or fuzzy_set_2 is None:
+            raise ValueError(defaults.OPERATION_SET_NONE)
+
+        if p is None or not isinstance(p, float):
+            raise TypeError(defaults.OPERATION_HAMACHER_T_NORM_WRONG_TYPE)
+
+        if p < 0.:
+            raise ValueError(defaults.OPERATION_HAMACHER_NORM_NEGATIVE_PARAMETER)
 
         to_return = MutableFuzzySet(Domain.from_domains_merge((fuzzy_set_1.domain, fuzzy_set_2.domain)))
 

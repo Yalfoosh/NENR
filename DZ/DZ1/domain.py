@@ -13,22 +13,10 @@ class Domain:
         self.__members = tuple(range(*integer_range))
 
     @staticmethod
-    def from_domains_merge(domains: Tuple["Domain", "Domain"]):
+    def from_domains(domains: Tuple["Domain", "Domain"]) -> "Domain":
         if domains is None or not isinstance(domains, tuple) or not len(domains) == 2\
                 or not (isinstance(domains[0], Domain) and isinstance(domains[1], Domain)):
-            raise ValueError("Wrong domain input.")
-
-        to_return = Domain((0, 1))
-
-        to_return.__members = tuple(sorted(set(domains[0].__members + domains[1].__members)))
-
-        return to_return
-
-    @staticmethod
-    def from_domains(domains: Tuple["Domain", "Domain"]):
-        if domains is None or not isinstance(domains, tuple) or not len(domains) == 2\
-                or not (isinstance(domains[0], Domain) and isinstance(domains[1], Domain)):
-            raise ValueError("Wrong domain input.")
+            raise ValueError(defaults.DOMAIN_INPUT_IS_POOPOO)
 
         members = list()
 
@@ -47,10 +35,22 @@ class Domain:
         to_return.__members = tuple(members)
         return to_return
 
-    def cardinality(self):
+    @staticmethod
+    def from_domains_merge(domains: Tuple["Domain", "Domain"]) -> "Domain":
+        if domains is None or not isinstance(domains, tuple) or not len(domains) == 2 \
+                or not (isinstance(domains[0], Domain) and isinstance(domains[1], Domain)):
+            raise ValueError(defaults.DOMAIN_INPUT_IS_POOPOO)
+
+        to_return = Domain((0, 1))
+
+        to_return.__members = tuple(sorted(set(domains[0].__members + domains[1].__members)))
+
+        return to_return
+
+    def cardinality(self) -> int:
         return len(self)
 
-    def index(self, element, start=None, end=None):
+    def index(self, element, start=None, end=None) -> int:
         if start is None or not isinstance(start, int):
             start = 0
 
@@ -59,11 +59,11 @@ class Domain:
 
         return self.__members.index(element, start, end)
 
-    def __getitem__(self, key):
+    def __getitem__(self, key) -> Tuple or int:
         return self.__members[key]
 
-    def __len__(self):
+    def __len__(self) -> int:
         return len(self.__members)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return str(self.__members)

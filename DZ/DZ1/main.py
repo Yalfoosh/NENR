@@ -3,8 +3,9 @@ from fuzzy_set import Fuzzy, MutableFuzzySet, CalculatedFuzzySet
 from operation import Operation
 
 
-def test_1():
-    print("Test 1:\n")
+# region Tasks
+def task_1():
+    print("Zadatak [1]:\n")
 
     domains = (Domain((0, 5)), Domain((0, 3)))
     merged_domain = Domain.from_domains(domains)
@@ -24,24 +25,25 @@ def test_1():
     print("\n")
 
 
-def test_2():
-    print("Test 2:\n")
+def task_2():
+    print("Zadatak [2]:\n")
 
     domains = (Domain((0, 11)), Domain((-5, 6)))
     func = Fuzzy.fuzzy_lambda(domains[1].index(-4), domains[1].index(0), domains[1].index(4))
     sets = (MutableFuzzySet(domains[0]), CalculatedFuzzySet(domains[1], func))
+    titles = ("S₁", "S₂ (lambda<-4, 0, 4>(D₂))")
 
     for i, value in enumerate((1., 0.8, 0.6, 0.4, 0.2)):
         sets[0].set(i, value)
 
-    for s in sets:
-        print("{}\n".format(s))
+    for t, s in zip(titles, sets):
+        print("{}:\n{}\n".format(t, s))
 
     print("\n")
 
 
-def test_3():
-    print("Test 3:\n")
+def task_3():
+    print("Zadatak [3]:\n")
 
     fuzzy_set = MutableFuzzySet(Domain((0, 11)))
 
@@ -53,16 +55,17 @@ def test_3():
     hamacher_set = Operation.t_norm_hamacher(fuzzy_set, not_fuzzy_set, 1.)
 
     sets = (fuzzy_set, not_fuzzy_set, union_set, hamacher_set)
-    title = ("Set", "Not set", "Set U Not set", "Hamacher T-Norm of Set and Not Set, p = 1.0")
+    titles = ("S₁", "S₂ (NOT(S₁))", "S₁ ∪ S₂", "Hamacher T-norma <1.0> (S₁, S₂)")
 
-    for s, t in zip(sets, title):
+    for t, s in zip(titles, sets):
         print("{}:\n{}\n".format(t, s))
 
 
-def test():
-    test_1()
-    test_2()
-    test_3()
+def do_tasks():
+    task_1()
+    task_2()
+    task_3()
+# endregion
 
 
-test()
+do_tasks()
