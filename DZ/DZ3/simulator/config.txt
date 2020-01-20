@@ -1,0 +1,4 @@
+python F:\Backup\FER\NENR\DZ\DZ3\main.py
+2
+20
+10
