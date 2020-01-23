@@ -90,6 +90,6 @@ class GeneticNN:
                                       epochs=epochs,
                                       callbacks=callbacks,
                                       verbose=verbose,
-                                      low=-5.,
-                                      high=5,
+                                      low=0.5,
+                                      high=1.5,
                                       **kwargs)
